@@ -33,6 +33,7 @@ directory "/home/vagrant/.emacs.d/" do
   group "vagrant"
   mode "0755"
   action :create
+  not_if { File.exists?("/home/vagrant/.emacs.d") }
 end
 
 # Cask
