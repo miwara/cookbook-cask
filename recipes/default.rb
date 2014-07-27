@@ -6,24 +6,26 @@
 #
 # All rights reserved - Do Not Redistribute
 #
-git "/home/vagrant/cask" do
-  repository "https://github.com/cask/cask.git"
-  reference "master"
+# git "/home/vagrant/cask" do
+#   repository "https://github.com/cask/cask.git"
+#   reference "master"
 
-  user "vagrant"
-  group "vagrant"
-end
-
-# execute "install cask" do
 #   user "vagrant"
 #   group "vagrant"
-
-#   cwd "/home/vagrant"
-#   command <<-EOH
-#   cd /home/vagrant
-#   curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python
-#   EOH
 # end
+
+execute "install cask" do
+  user "vagrant"
+  group "vagrant"
+  environment "HOME" => "/home/vagrant"
+
+  cwd "/home/vagrant"
+  command <<-EOH
+  curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python
+  EOH
+
+  not_if { File.exists?("/home/vagrant/.cask") }
+end
 
 # .emacs.d
 directory "/home/vagrant/.emacs.d/" do
@@ -44,11 +46,13 @@ end
 execute "install emacs package" do
   user "vagrant"
   group "vagrant"
+  environment "HOME" => "/home/vagrant"
+  environment "PATH" => "/home/vagrant/.cask/bin:$PATH"
 
+  # export PATH="$HOME/.cask/bin:$PATH"
   cwd "/home/vagrant/.emacs.d"
   command <<-EOH
-  export PATH="/home/vagrant/cask/bin:$PATH";
-  cd /home/vagrant/.emacs.d
+  cask upgrade-cask
   cask
   EOH
 end
