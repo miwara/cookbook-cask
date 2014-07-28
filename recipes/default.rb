@@ -6,13 +6,6 @@
 #
 # All rights reserved - Do Not Redistribute
 #
-# git "/home/vagrant/cask" do
-#   repository "https://github.com/cask/cask.git"
-#   reference "master"
-
-#   user "vagrant"
-#   group "vagrant"
-# end
 
 execute "install cask" do
   user "vagrant"
@@ -42,17 +35,4 @@ template "/home/vagrant/.emacs.d/Cask" do
   owner "vagrant"
   group "vagrant"
   mode "0644"
-end
-
-execute "install emacs package" do
-  user "vagrant"
-  group "vagrant"
-  environment "HOME" => "/home/vagrant"
-
-  cwd "/home/vagrant/.emacs.d"
-  command <<-EOH
-  export PATH="$HOME/.cask/bin:$PATH"
-  cask upgrade-cask
-  cask
-  EOH
 end
