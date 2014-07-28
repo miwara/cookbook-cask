@@ -6,13 +6,6 @@
 #
 # All rights reserved - Do Not Redistribute
 #
-# git "/home/vagrant/cask" do
-#   repository "https://github.com/cask/cask.git"
-#   reference "master"
-
-#   user "vagrant"
-#   group "vagrant"
-# end
 
 execute "install cask" do
   user "vagrant"
