@@ -48,10 +48,10 @@ execute "install emacs package" do
   user "vagrant"
   group "vagrant"
   environment "HOME" => "/home/vagrant"
-  environment "PATH" => "/home/vagrant/.cask/bin:$PATH"
 
   cwd "/home/vagrant/.emacs.d"
   command <<-EOH
+  export PATH="$HOME/.cask/bin:$PATH"
   cask upgrade-cask
   cask
   EOH
