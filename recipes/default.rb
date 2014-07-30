@@ -8,31 +8,31 @@
 #
 
 execute "install cask" do
-  user "vagrant"
-  group "vagrant"
-  environment "HOME" => "/home/vagrant"
+  user "#{node['user']}"
+  group "#{node['user']}"
+  environment "HOME" => "/home/#{node['user']}"
 
-  cwd "/home/vagrant"
+  cwd "/home/#{node['user']}"
   command <<-EOH
   curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python
   EOH
 
-  not_if { File.exists?("/home/vagrant/.cask") }
+  not_if { File.exists?("/home/#{node['user']}/.cask") }
 end
 
 # .emacs.d
-directory "/home/vagrant/.emacs.d/" do
-  owner "vagrant"
-  group "vagrant"
+directory "/home/#{node['user']}/.emacs.d/" do
+  owner "#{node['user']}"
+  group "#{node['user']}"
   mode "0755"
   action :create
-  not_if { File.exists?("/home/vagrant/.emacs.d") }
+  not_if { File.exists?("/home/#{node['user']}/.emacs.d") }
 end
 
 # Cask
-template "/home/vagrant/.emacs.d/Cask" do
+template "/home/#{node['user']}/.emacs.d/Cask" do
   source "Cask.erb"
-  owner "vagrant"
-  group "vagrant"
+  owner "#{node['user']}"
+  group "#{node['user']}"
   mode "0644"
 end
