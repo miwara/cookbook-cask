@@ -14,8 +14,7 @@ execute "install emacs package" do
 
   cwd "/home/vagrant/.emacs.d"
   command <<-EOH
-  export PATH="$HOME/.cask/bin:$PATH"
-  cask upgrade-cask
-  cask
+  $HOME/.cask/bin/cask upgrade-cask
+  $HOME/.cask/bin/cask
   EOH
 end
