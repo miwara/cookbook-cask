@@ -8,14 +8,13 @@
 #
 
 execute "install emacs package" do
-  user "vagrant"
-  group "vagrant"
-  environment "HOME" => "/home/vagrant"
+  user node['user']
+  group node['user']
+  environment "HOME" => "/home/#{node['user']}"
 
   cwd "/home/vagrant/.emacs.d"
   command <<-EOH
-  export PATH="$HOME/.cask/bin:$PATH"
-  cask upgrade-cask
-  cask
+  $HOME/.cask/bin/cask upgrade-cask
+  $HOME/.cask/bin/cask
   EOH
 end
