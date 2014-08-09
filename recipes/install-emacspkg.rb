@@ -8,9 +8,9 @@
 #
 
 execute "install emacs package" do
-  user "vagrant"
-  group "vagrant"
-  environment "HOME" => "/home/vagrant"
+  user "#{node['user']}"
+  group "#{node['user']}"
+  environment "HOME" => "/home/#{node['user']}"
 
   cwd "/home/vagrant/.emacs.d"
   command <<-EOH
