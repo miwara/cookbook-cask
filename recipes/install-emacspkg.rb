@@ -8,8 +8,8 @@
 #
 
 execute "install emacs package" do
-  user "#{node['user']}"
-  group "#{node['user']}"
+  user node['user']
+  group node['user']
   environment "HOME" => "/home/#{node['user']}"
 
   cwd "/home/vagrant/.emacs.d"

@@ -8,8 +8,8 @@
 #
 
 execute "install cask" do
-  user "#{node['user']}"
-  group "#{node['user']}"
+  user node['user']
+  group node['user']
   environment "HOME" => "/home/#{node['user']}"
 
   cwd "/home/#{node['user']}"
@@ -22,8 +22,8 @@ end
 
 # .emacs.d
 directory "/home/#{node['user']}/.emacs.d/" do
-  owner "#{node['user']}"
-  group "#{node['user']}"
+  owner node['user']
+  group node['user']
   mode "0755"
   action :create
   not_if { File.exists?("/home/#{node['user']}/.emacs.d") }
@@ -32,7 +32,7 @@ end
 # Cask
 template "/home/#{node['user']}/.emacs.d/Cask" do
   source "Cask.erb"
-  owner "#{node['user']}"
-  group "#{node['user']}"
+  owner node['user']
+  group node['user']
   mode "0644"
 end
