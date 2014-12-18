@@ -9,7 +9,7 @@
 
 execute "install emacs package" do
   user node['user']
-  group node['user']
+  group node['group']
   environment "HOME" => "/home/#{node['user']}"
 
   cwd "/home/vagrant/.emacs.d"
