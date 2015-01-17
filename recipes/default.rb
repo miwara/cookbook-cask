@@ -35,4 +35,6 @@ template "/home/#{node['user']}/.emacs.d/Cask" do
   owner node['user']
   group node['group']
   mode "0644"
+
+  not_if { File.exists?("/home/#{node['user']}/.emacs.d/Cask") }
 end
