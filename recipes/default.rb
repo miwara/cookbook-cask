@@ -37,4 +37,5 @@ template "/home/#{node['user']}/.emacs.d/Cask" do
   mode "0644"
 
   not_if { File.exists?("/home/#{node['user']}/.emacs.d/Cask") }
+  notifies :run, "execute[install emacs package]", :immediately
 end

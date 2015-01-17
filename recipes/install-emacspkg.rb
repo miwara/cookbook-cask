@@ -17,4 +17,6 @@ execute "install emacs package" do
   $HOME/.cask/bin/cask upgrade-cask
   $HOME/.cask/bin/cask
   EOH
+
+  action :nothing
 end
